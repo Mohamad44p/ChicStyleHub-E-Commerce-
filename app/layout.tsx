@@ -5,12 +5,13 @@ import Navbar from "./components/Navbar";
 import CartProvider from "./components/Providers";
 import ShoppingCartModal from "./components/ShoppingCartModal";
 const inter = Inter({ subsets: ["latin"] });
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "ChicStyleHub - Your Destination for Fashion and Elegance",
-  description: "Discover the latest trends in fashion at ChicStyleHub. Explore a curated collection of chic and stylish clothing. Elevate your wardrobe with elegance and sophistication.",
+  description:
+    "Discover the latest trends in fashion at ChicStyleHub. Explore a curated collection of chic and stylish clothing. Elevate your wardrobe with elegance and sophistication.",
 };
-
 
 export default function RootLayout({
   children,
@@ -20,11 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CartProvider>
-        <Navbar />
-        <ShoppingCartModal/>
-        {children}
-        </CartProvider>
+        <ClerkProvider>
+          <CartProvider>
+            <Navbar />
+            <ShoppingCartModal />
+            {children}
+          </CartProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
