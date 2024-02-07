@@ -6,6 +6,8 @@ import CartProvider from "./components/Providers";
 import ShoppingCartModal from "./components/ShoppingCartModal";
 const inter = Inter({ subsets: ["latin"] });
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/app/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "ChicStyleHub - Your Destination for Fashion and Elegance",
@@ -19,15 +21,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+       <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+       >
         <ClerkProvider>
+         
           <CartProvider>
             <Navbar />
             <ShoppingCartModal />
             {children}
           </CartProvider>
+          <Toaster/>
         </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

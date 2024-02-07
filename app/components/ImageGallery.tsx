@@ -1,8 +1,9 @@
 'use client';
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { urlFor } from "@/lib/sanity";
 import Image from "next/image";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 interface iAppProps {
   images: any;
@@ -14,10 +15,25 @@ export default function ImageGallery({ images }: iAppProps) {
     setBigImage(image)
   }
   return (
-    <div className="grid gap-4 lg:grid-cols-5">
+    <div className="grid gap-4 lg:grid-cols-5 ">
       <div className="order-last flex gap-4 lg:order-none lg:flex-col">
+      <Suspense
+               fallback={
+              <>
+              {images.map((image: any, idx: any) => (
+                <div className="flex flex-col space-y-3" key={images._id}>
+                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-[250px]" />
+                  <Skeleton className="h-4 w-[200px]" />
+                </div>
+              </div>
+              ))}
+              </>
+            }
+          >
         {images.map((image: any, idx: any) => (
-          <div key={idx} className="overflow-hidden rounded-lg bg-gray-100">
+          <div key={idx} className="overflow-hidden rounded-lg bg-gray-100 shadow-2xl shadow-gray-300">
             <Image
               src={urlFor(image).url()}
               alt="Great Photo"
@@ -28,9 +44,10 @@ export default function ImageGallery({ images }: iAppProps) {
             />
           </div>
         ))}
+        </Suspense>
       </div>
 
-      <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
+      <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4 dark:shadow-2xl dark:shadow-gray-300">
           <Image 
             src={urlFor(bigImage).url()}
             alt="Great Photo"

@@ -22,10 +22,10 @@ async function getData() {
 export default async function Newest() {
   const data: simplifedProduct[] = await getData();
   return (
-    <div className="bg-white">
+    <div >
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="flex justify-between items-center"> 
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900">Our Newest Products</h2>
+            <h2 className="text-2xl font-bold tracking-tight dark:text-white text-gray-900">Our Newest Products</h2>
             <Link className="flex items-center gap-x-1 text-primary" href="/all">
               See All <span><ArrowRight/></span>
             </Link>
@@ -44,16 +44,16 @@ export default async function Newest() {
                   </div> 
                   <div className="flex justify-between mt-4">
                       <div>
-                        <h3 className="text-sm text-gray-700">
+                        <h3 className="text-sm text-gray-700 dark:text-white">
                           <Link href={`/product/${product.slug}`}>
                             {product.name}
                           </Link>
                         </h3>
-                        <p className="mt-1 text-sm text-gray-500">
+                        <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
                           {product.categoryName}
                         </p>
                       </div>
-                      <p className="text-sm font-medium text-gray-900">${product.price}</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-300">${product.price}</p>
                     </div> 
               </div>
             ))}

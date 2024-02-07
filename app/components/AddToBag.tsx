@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { urlFor } from "@/lib/sanity";
+import { toast } from "sonner";
 import { useShoppingCart } from "use-shopping-cart";
 
 export interface ProductCart {
@@ -34,6 +35,7 @@ export default function AddToBag({
   return (
     <Button
       onClick={() => {
+        toast.success("Added to cart");
         addItem(product), handleCartClick();
       }}
     >

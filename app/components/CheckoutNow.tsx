@@ -4,6 +4,7 @@ import { useShoppingCart } from "use-shopping-cart";
 import { ProductCart } from "./AddToBag";
 import { urlFor } from "@/lib/sanity";
 import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 export default function CheckoutNow({
   currency,
@@ -31,6 +32,7 @@ export default function CheckoutNow({
 
   const handleCheckout = () => {
     if (user) {
+      toast.loading("Redirecting...");
       buyNow(product.price_id);
     } else {
       window.location.href = "/sign-up";

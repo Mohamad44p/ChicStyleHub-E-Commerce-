@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useShoppingCart } from "use-shopping-cart";
 import Userauth from "./Userauth";
+import { ModeToggle } from "./ModeToggle";
 
 const links =[
   {name : 'Home', href : '/'},
@@ -28,11 +29,11 @@ export default function Navbar() {
           {links.map((link , idx) => (
             <div key={idx}>
               {pathname === link.href ? (
-                <Link href={link.href} className="text-lg font-semibold text-primary">
+                <Link href={link.href} className="text-lg font-semibold text-primary dark:text-white ">
                     {link.name}
                 </Link>
               ):(
-                <Link href={link.href} className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-primary">
+                <Link href={link.href} className="text-lg font-semibold text-gray-600 dark:text-gray-300 transition duration-100 dark:hover:text-white hover:text-primary">
                   {link.name}
                 </Link>
               )
@@ -49,6 +50,10 @@ export default function Navbar() {
               Cart
             </span>
           </Button>
+        </div>
+
+        <div>
+          <ModeToggle/>
         </div>
       </div>
    </header>
