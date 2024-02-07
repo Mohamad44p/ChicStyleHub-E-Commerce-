@@ -35,7 +35,7 @@ export default function CheckoutNow({
       toast.loading("Redirecting...");
       buyNow(product.price_id);
     } else {
-      window.location.href = "/sign-up";
+      window.location.href = "/stripe/error";
     }
   };
 
