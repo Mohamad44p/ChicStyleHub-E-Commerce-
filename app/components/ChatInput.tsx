@@ -1,5 +1,6 @@
 'use client'
-import { useMutation, MutationFunction, MutationStatus } from '@tanstack/react-query';
+
+import { useMutation, MutationStatus } from '@tanstack/react-query';
 import { nanoid } from 'nanoid';
 import { FC, HTMLAttributes, useContext, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -23,12 +24,12 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
   } = useContext(MessagesContext);
 
   // Define the mutation function type
-  type SendMessageMutation = MutationFunction<ReadableStream<Uint8Array> | null, Error, Message, void>;
+  type SendMessageMutation = (message: Message) => Promise<void>;
 
-  const mutation = useMutation<SendMessageMutation>({
+  const mutation = useMutation<ReadableStream<Uint8Array> | null, Error, Message, void>({
     mutationKey: ['sendMessage'],
     // include message to later use it in onMutate
-    mutationFn: async (_message: Message) => {
+    mutationFn: async (message: Message) => {
       const response = await fetch('/api/message', {
         method: 'POST',
         headers: {
@@ -84,7 +85,7 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
     },
   });
 
-  const sendMessage = mutation.mutate;
+  const sendMessage: SendMessageMutation = mutation.mutate;
   const isLoading: MutationStatus = mutation.isLoading;
 
   return (
