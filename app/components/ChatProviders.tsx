@@ -1,18 +1,21 @@
-'use client';
+'use client'
 
-import { FC } from 'react'
+import { MessagesProvider } from '@/app/context/messages'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { MessagesProvider } from '../context/messages';
+import { FC, ReactNode } from 'react'
 
-interface ChatProvidersProps {
-  children: React.ReactNode
+interface LayoutProps {
+  children: ReactNode
 }
 
-const ChatProviders: FC<ChatProvidersProps> = ({ children }) => {
-  const queryClient = new QueryClient();
+const Layout: FC<LayoutProps> = ({ children }) => {
+  const queryClient = new QueryClient()
+
   return (
-    <QueryClientProvider client={queryClient}><MessagesProvider>{children}</MessagesProvider></QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <MessagesProvider>{children}</MessagesProvider>
+    </QueryClientProvider>
   )
 }
 
-export default ChatProviders
+export default Layout

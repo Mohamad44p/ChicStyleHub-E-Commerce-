@@ -9,7 +9,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Chat from "./components/Chat";
-import ChatProviders from "./components/ChatProviders";
+import Layout from "./components/ChatProviders";
 
 export const metadata: Metadata = {
   title: "ChicStyleHub - Your Destination for Fashion and Elegance",
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <ChatProviders>
+      <Layout>
       <body className={inter.className}>
        <ThemeProvider
         attribute="class"
@@ -37,14 +37,14 @@ export default function RootLayout({
           <CartProvider>
             <Navbar />
             <ShoppingCartModal />
-            <Chat/>
             {children}
+            <Chat/>
           </CartProvider>
           <Toaster/>
         </ClerkProvider>
         </ThemeProvider>
       </body>
-      </ChatProviders>
+      </Layout>
     </html>
   );
 }

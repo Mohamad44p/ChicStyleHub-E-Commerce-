@@ -1,3 +1,6 @@
+import { UseMutationResult } from "@tanstack/react-query";
+import { Message } from "postcss";
+
 export interface simplifedProduct {
   _id: string;
   imageUrl: string;
@@ -18,3 +21,4 @@ export interface fullProduct {
   description: string;
   price_id: string;
 }
+

@@ -3,7 +3,7 @@
 import { MessagesContext } from '@/app/context/messages'
 import { cn } from '@/lib/utils'
 import { Message } from '@/lib/validators/message'
-import { useMutation } from '@tanstack/react-query'
+import { MutationFunction, useMutation } from '@tanstack/react-query'
 import { CornerDownLeft, Loader2 } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import { FC, HTMLAttributes, useContext, useRef, useState } from 'react'
@@ -23,7 +23,14 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
     setIsMessageUpdating,
   } = useContext(MessagesContext)
 
-  const { mutate: sendMessage, isLoading } = useMutation({
+  interface Message {
+    id: string;
+    isUserMessage: boolean;
+    text: string;
+  }
+  type SendMessageMutation = MutationFunction<ReadableStream<Uint8Array> | Message, void>;
+
+  const { mutate: sendMessage, isLoading }: MutationResultPair<ReadableStream<Uint8Array> | null, Error, Message, void> = useMutation<SendMessageMutation>({
     mutationKey: ['sendMessage'],
     // include message to later use it in onMutate
     mutationFn: async (_message: Message) => {
