@@ -47,7 +47,7 @@ export default async function Hero() {
       </div>
       <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
         <div className="flex h-12 w-64 divide-x overflow-hidden rounded-lg border">
-            <Link href="/Men" className="flex w-1/3 items-center justify-center dark:text-green-50 text-gray-500 duration-100 dark:hover:bg-gray-500 hover:bg-gray-200 active:bg-gray-200">
+            <Link  href="/Men" className="flex w-1/3 items-center justify-center dark:text-green-50 text-gray-500 duration-100 dark:hover:bg-gray-500 hover:bg-gray-200 active:bg-gray-200">
               Men
             </Link>
             <Link href="/Women" className="flex w-1/3 items-center justify-center dark:text-green-50 text-gray-500 duration-100 dark:hover:bg-gray-500 hover:bg-gray-200 active:bg-gray-200">
@@ -55,6 +55,9 @@ export default async function Hero() {
             </Link>
             <Link href="/Teens" className="flex w-1/3 items-center justify-center dark:text-green-50 text-gray-500 duration-100 dark:hover:bg-gray-500 hover:bg-gray-200 active:bg-gray-200">
               Teens
+            </Link>
+            <Link href="/Kids" className="flex w-1/3 items-center justify-center dark:text-green-50 text-gray-500 duration-100 dark:hover:bg-gray-500 hover:bg-gray-200 active:bg-gray-200">
+              Kids
             </Link>
         </div>
       </div>

@@ -8,14 +8,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 async function getData() {
   const query = `
-  *[_type == "product"]  {
+  *[_type == "product"]| order(_createdAt desc){
     _id,
     price,
     name,
     "slug": slug.current,
     "categoryName": category->name,
     "imageUrl": images[0].asset->url
-  }  
+  }
   `;
   const data = await client.fetch(query);
 
@@ -35,15 +35,15 @@ export default async function AllProduct() {
           <Suspense
             fallback={
               <>
-              {data.map((product) => (
-                <div className="flex flex-col space-y-3" key={product._id}>
-                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-[250px]" />
-                  <Skeleton className="h-4 w-[200px]" />
-                </div>
-              </div>
-              ))}
+                {data.map((product) => (
+                  <div className="flex flex-col space-y-3" key={product._id}>
+                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
+                    </div>
+                  </div>
+                ))}
               </>
             }
           >
@@ -52,20 +52,21 @@ export default async function AllProduct() {
                 <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                   <Image
                     src={product.imageUrl}
-                    alt={product.name}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    alt="Product image"
+                    className="w-full h-full object-cover object-center lg:h-full lg:w-full"
                     width={300}
                     height={300}
                   />
                 </div>
-                <div className="flex justify-between mt-4">
+
+                <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700 dark:text-white dark:hover:text-gray-300">
                       <Link href={`/product/${product.slug}`}>
                         {product.name}
                       </Link>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-300 ">
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
                       {product.categoryName}
                     </p>
                   </div>
