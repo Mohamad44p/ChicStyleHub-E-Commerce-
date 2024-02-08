@@ -8,6 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import Chat from "./components/Chat";
+import ChatProviders from "./components/ChatProviders";
 
 export const metadata: Metadata = {
   title: "ChicStyleHub - Your Destination for Fashion and Elegance",
@@ -22,6 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <ChatProviders>
       <body className={inter.className}>
        <ThemeProvider
         attribute="class"
@@ -34,12 +37,14 @@ export default function RootLayout({
           <CartProvider>
             <Navbar />
             <ShoppingCartModal />
+            <Chat/>
             {children}
           </CartProvider>
           <Toaster/>
         </ClerkProvider>
         </ThemeProvider>
       </body>
+      </ChatProviders>
     </html>
   );
 }

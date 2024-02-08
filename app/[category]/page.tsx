@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-async function getData(cateogry: string) {
+export async function getData(cateogry: string) {
   const query = `*[_type == "product" && category->name == "${cateogry}" ] {
     _id,
     "imageUrl": images[0].asset->url,
