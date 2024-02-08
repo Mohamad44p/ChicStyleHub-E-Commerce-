@@ -37,6 +37,7 @@ export default function ImageGallery({ images }: iAppProps) {
             <Image
               src={urlFor(image).url()}
               alt="Great Photo"
+              loading="lazy" 
               className="h-full w-full object-cover object-center cursor-pointer"
               width={200}
               height={200}
@@ -51,6 +52,7 @@ export default function ImageGallery({ images }: iAppProps) {
           <Image 
             src={urlFor(bigImage).url()}
             alt="Great Photo"
+            loading="lazy"
             className="h-full w-full object-cover object-center"
             width={500}
             height={500}

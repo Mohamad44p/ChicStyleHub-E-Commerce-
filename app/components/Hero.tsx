@@ -29,6 +29,7 @@ export default async function Hero() {
             <Image
               src={urlFor(data.image2).url()}
               alt="Great Photo"
+              loading="lazy"
               className="h-full w-full object-cover object-center"
               width={500}
               height={500}
@@ -37,6 +38,7 @@ export default async function Hero() {
           <div className="overflow-hidden rounded-lg bg-gray-100 shadow-lg">
             <Image
               src={urlFor(data.image1).url()}
+              loading="lazy"
               alt="Great Photo"
               className="h-full w-full object-cover object-center"
               width={500}

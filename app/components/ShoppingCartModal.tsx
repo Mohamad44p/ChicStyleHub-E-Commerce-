@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import { useShoppingCart } from "use-shopping-cart";
+import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 export default function ShoppingCartModal() {
   const {
@@ -21,20 +22,25 @@ export default function ShoppingCartModal() {
     redirectToCheckout,
   } = useShoppingCart();
 
+  const { user } = useUser();
+
   async function handleCheckoutClick(event: any) {
     event.preventDefault();
     try {
-      const result = await redirectToCheckout();
-      if (result?.error) {
-        console.log("result");
+      if (user) {
+        toast.loading("Redirecting...");
+        const result = await redirectToCheckout();
+      }else{
+        window.location.href = "/stripe/error";
       }
     } catch (error) {
+      toast.error("Something went wrong with your checkout");
       console.log(error);
     }
   }
   return (
-    <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
-      <SheetContent className="sm:max-w-lg w-[90vw]">
+    <Sheet  open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
+      <SheetContent className="sm:max-w-lg w-[90vw] z-[100]">
         <SheetHeader>
           <SheetTitle>Shopping Cart</SheetTitle>
         </SheetHeader>

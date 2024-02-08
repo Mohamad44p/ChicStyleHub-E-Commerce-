@@ -36,6 +36,7 @@ export default function CheckoutNow({
       buyNow(product.price_id);
     } else {
       window.location.href = "/stripe/error";
+      toast.error("Please login to checkout");
     }
   };
 
