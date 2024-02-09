@@ -2,7 +2,7 @@
 import { feachDataCategory } from "@/app/data";
 
 // Function to get products by category with availability check
-async function getProductsByCategory(category) {
+async function getProductsByCategory(category: string) {
   const products = await feachDataCategory(category);
   let productList = "";
   products.forEach(product => {
