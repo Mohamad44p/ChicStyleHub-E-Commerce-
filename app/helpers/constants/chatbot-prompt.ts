@@ -1,11 +1,12 @@
 // Import necessary modules and functions
 import { feachDataCategory } from "@/app/data";
+import { simplifedProduct } from "@/app/interface";
 
 // Function to get products by category with availability check
 async function getProductsByCategory(category: string) {
-  const products = await feachDataCategory(category);
+  const products: simplifedProduct[] = await feachDataCategory(category); // Specify the type of 'products' array
   let productList = "";
-  products.forEach(product => {
+  products.forEach((product: simplifedProduct) => { // Specify the type of 'product' parameter
     productList += `- [${product.name}](${product.slug}) - $${product.price}\n`;
   });
   return productList;
