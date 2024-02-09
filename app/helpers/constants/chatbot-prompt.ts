@@ -1,49 +1,69 @@
-// Import necessary modules and functions
 import { feachDataCategory } from "@/app/data";
 import { simplifedProduct } from "@/app/interface";
 
 // Function to get products by category with availability check
+async function getProductsForPrompt() {
+  const men = await getProductsByCategory("Men");
+  const women = await getProductsByCategory("Women");
+  const teens = await getProductsByCategory("Teens");
+  const Kids = await getProductsByCategory("Kids");
+  const ArabicPerfume = await getProductsByCategory("ArabicPerfume");
+  const WomenPerfume = await getProductsByCategory("WomenPerfume");
+  const MenPerfume = await getProductsByCategory("MenPerfume");
+  const Headset = await getProductsByCategory("Headset");
+  const TV = await getProductsByCategory("TV");
+  const Laptop = await getProductsByCategory("Laptop");
+  const Mobile = await getProductsByCategory("Mobile");
+
+  return { men, women, teens , Kids, ArabicPerfume, WomenPerfume, MenPerfume, Headset, TV, Laptop, Mobile };
+}
+
 async function getProductsByCategory(category: string) {
-  const products: simplifedProduct[] = await feachDataCategory(category); // Specify the type of 'products' array
+  const products: simplifedProduct[] = await feachDataCategory(category);
   let productList = "";
-  products.forEach((product: simplifedProduct) => { // Specify the type of 'product' parameter
+  products.forEach((product: simplifedProduct) => {
     productList += `- [${product.name}](${product.slug}) - $${product.price}\n`;
   });
   return productList;
 }
 
 // Chatbot prompt
-export const chatbotPrompt = `
-You are ChicStyle Hub Chatbot, a helpful customer support chatbot embedded on a fashion e-commerce website. You are here to assist users with their inquiries and provide information about the store's products and categories.
+export const chatbotPrompt = async () => {
+  const { men, women, teens , Kids, ArabicPerfume, WomenPerfume, MenPerfume, Headset, TV, Laptop, Mobile } = await getProductsForPrompt();
 
-Refuse any answer that does not have to do with the fashion store or its content.
-Provide short, concise answers.
+  return `
+    You are ChicStyle Hub Chatbot, a helpful customer support chatbot embedded on a fashion e-commerce website. You are here to assist users with their inquiries and provide information about the store's products and categories.
 
-**Product Information:**
-- You can inquire about the availability, price, and details of any product listed in our store.
-- I can provide information about products in categories such as fashion, electronics, and perfumes.
-- Feel free to ask about the name, price, and description of any product.
+    Refuse any answer that does not have to do with the fashion store or its content.
+    Provide short, concise answers.
 
-**Categories and Products:**
-- **Men:**
-  ${await getProductsByCategory("Men")}
-- **Women:**
-  ${await getProductsByCategory("Women")}
-- **Teens:**
-  ${await getProductsByCategory("Teens")}
-- **Kids:**
-  ${await getProductsByCategory("Kids")}
-- **Electronics:**
-  ${await getProductsByCategory("Electronics")}
-- **Mobile:**
-  ${await getProductsByCategory("Mobile")}
-- **TV:**
-  ${await getProductsByCategory("TV")}
-- **Perfumes:**
-  ${await getProductsByCategory("Perfumes")}
+    **Product Information:**
+    - You can inquire about the availability, price, and details of any product listed in our store.
+    - I can provide information about products in categories such as fashion, electronics, and perfumes.
+    - Feel free to ask about the name, price, and description of any product.
 
-**Newest Products:**
-- Check out our latest arrivals [here](/all)
+    **Categories and Products:**
+    - **Men:**
+      ${men}
+    - **Women:**
+      ${women}
+    - **Teens:**
+      ${teens}
+    - **Kids:**
+      ${Kids}
+    - **Perfumes:**
+      ${ArabicPerfume}
+      ${WomenPerfume}
+      ${MenPerfume}
+    - **Electronics:**
+      ${Headset}
+      ${TV}
+      ${Laptop}
+      ${Mobile}
 
-For any further assistance, feel free to ask!
-`;
+    **Newest Products:**
+    - Check out our latest arrivals [here](/all)
+
+    For any further assistance, feel free to ask!
+  `;
+};

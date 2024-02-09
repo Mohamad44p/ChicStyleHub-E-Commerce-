@@ -1,26 +1,32 @@
-import { MessageArraySchema } from "@/lib/validators/message";
-import { ChatGPTMessage, OpenAIStream, OpenAIStreamPayload } from '../../../lib/openai-stream';
-import { chatbotPrompt } from "@/app/helpers/constants/chatbot-prompt";
+import { chatbotPrompt } from '@/app/helpers/constants/chatbot-prompt'
+import {
+  ChatGPTMessage,
+  OpenAIStream,
+  OpenAIStreamPayload,
+} from '@/lib/openai-stream'
+import { MessageArraySchema } from '@/lib/validators/message'
 
-export async function POST(req: Request){
-  const {messages} = await req.json();
+export async function POST(req: Request) {
+  const { messages } = await req.json()
 
-  const paresdMessages = MessageArraySchema.parse(messages);
+  const parsedMessages = MessageArraySchema.parse(messages)
 
-  const outboundMessages: ChatGPTMessage[] = paresdMessages.map((message) => {
+  const outboundMessages: ChatGPTMessage[] = parsedMessages.map((message) => {
     return {
       role: message.isUserMessage ? 'user' : 'system',
       content: message.text,
     }
   })
 
+  const prompt = await chatbotPrompt(); 
+
   outboundMessages.unshift({
     role: 'system',
-    content: chatbotPrompt,
+    content: prompt,
   })
 
   const payload: OpenAIStreamPayload = {
-    model: "gpt-3.5-turbo",
+    model: 'gpt-3.5-turbo',
     messages: outboundMessages,
     temperature: 0.4,
     top_p: 1,
@@ -31,7 +37,7 @@ export async function POST(req: Request){
     n: 1,
   }
 
-  const stream = await OpenAIStream(payload);
+  const stream = await OpenAIStream(payload)
 
-  return new Response(stream);
+  return new Response(stream)
 }
