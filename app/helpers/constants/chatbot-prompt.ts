@@ -1,7 +1,6 @@
 import { feachDataCategory } from "@/app/data";
 import { simplifedProduct } from "@/app/interface";
 
-// Function to get products by category with availability check
 async function getProductsForPrompt() {
   const men = await getProductsByCategory("Men");
   const women = await getProductsByCategory("Women");
@@ -27,7 +26,6 @@ async function getProductsByCategory(category: string) {
   return productList;
 }
 
-// Chatbot prompt
 export const chatbotPrompt = async () => {
   const { men, women, teens , Kids, ArabicPerfume, WomenPerfume, MenPerfume, Headset, TV, Laptop, Mobile } = await getProductsForPrompt();
 

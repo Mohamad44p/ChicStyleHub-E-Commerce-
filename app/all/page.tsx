@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 async function getData() {
   const query = `
-  *[_type == "product"][0...30] | order(_createdAt desc){
+  *[_type == "product"][0...35] | order(_createdAt desc){
     _id,
     price,
     name,

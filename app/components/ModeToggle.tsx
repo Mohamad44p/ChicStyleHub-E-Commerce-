@@ -1,5 +1,6 @@
 "use client";
 
+import { FC, HTMLAttributes } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -11,11 +12,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
-export function ModeToggle() {
+interface ModeToggleProps extends HTMLAttributes<HTMLDivElement> {}
+const ModeToggle: FC<ModeToggleProps> =({className , ...props}) => {
   const { setTheme } = useTheme();
 
   return (
+    <div {...props} className={cn('hidden lg:flex' , className)}>
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
@@ -52,5 +56,8 @@ export function ModeToggle() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+    </div>
   );
 }
+
+export default ModeToggle;

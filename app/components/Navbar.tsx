@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useShoppingCart } from "use-shopping-cart";
 import Userauth from "./Userauth";
-import { ModeToggle } from "./ModeToggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,6 +12,8 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Electronics, Perfumes, components } from "./NavLinks";
+import MobialNavbar from "./MobialNavbar";
+import ModeToggle from "./ModeToggle";
 
 const links = [
   { name: "Home", href: "/" },
@@ -26,7 +27,7 @@ export default function Navbar() {
   const { handleCartClick } = useShoppingCart();
   return (
     <header className="mb-8 border-b">
-      <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
+      <div className="flex items-center justify-between gap-5 mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
         <Link href="/">
           <h1 className="md:text-4xl text-2xl font-bold">
             ChicStyle <span className="text-primary">Hub</span>
@@ -141,6 +142,8 @@ export default function Navbar() {
             </span>
           </Button>
         </div>
+
+        <MobialNavbar />
       </div>
     </header>
   );
