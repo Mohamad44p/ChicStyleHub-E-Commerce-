@@ -59,7 +59,7 @@ const MobialNavbar: FC<MobialNavbarProps> = ({}) => {
             </SheetHeader>
             <div className="flex items-center justify-center gap-4 py-12">
               <div className="grid grid-cols-1 justify-center items-center gap-4">
-                <NavigationMenu className="flex z-[60] list-none hover:text-primary dark:hover:text-white">
+                <NavigationMenu className="flex z-[60] list-none hover:text-primary  dark:hover:text-white">
                   <NavigationMenuItem>
                     <NavigationMenuTrigger>Fashion</NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -69,6 +69,7 @@ const MobialNavbar: FC<MobialNavbarProps> = ({}) => {
                             key={component.title}
                             title={component.title}
                             href={component.href}
+                            className="border-b-2 border-red-300 border-dashed"
                           >
                             {pathname === component.href ? (
                               <h1 className="text-lg font-semibold text-primary dark:text-white ">
@@ -99,6 +100,7 @@ const MobialNavbar: FC<MobialNavbarProps> = ({}) => {
                             key={Electronics.title}
                             title={Electronics.title}
                             href={Electronics.href}
+                            className="border-b-2 border-red-300 border-dashed"
                           >
                             {pathname === Electronics.href ? (
                               <h1 className="text-lg font-semibold text-primary dark:text-white ">
@@ -129,6 +131,7 @@ const MobialNavbar: FC<MobialNavbarProps> = ({}) => {
                             key={Perfumes.title}
                             title={Perfumes.title}
                             href={Perfumes.href}
+                            className="border-b-2 border-red-300 border-dashed"
                           >
                             {pathname === Perfumes.href ? (
                               <h1 className="text-lg font-semibold text-primary dark:text-white ">
@@ -150,7 +153,7 @@ const MobialNavbar: FC<MobialNavbarProps> = ({}) => {
                 </NavigationMenu>
 
                 <div className="flex items-center justify-center gap-4 py-5">
-                  <Userauth className="flex flex-col gap-8" />
+                  <Userauth className="flex flex-col gap-8"  />
                 </div>
                 <div className="flex items-center justify-center gap-4 py-5">
                   <ModeToggle className="flex" />

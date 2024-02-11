@@ -57,6 +57,7 @@ export default function ShoppingCartModal() {
                         <Image
                           src={entry.image as string}
                           alt="Product image"
+                          loading="lazy"
                           width={100}
                           height={100}
                         />

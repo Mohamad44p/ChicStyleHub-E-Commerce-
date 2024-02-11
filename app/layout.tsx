@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     "Discover the latest trends in fashion at ChicStyleHub. Explore a curated collection of chic and stylish clothing. Elevate your wardrobe with elegance and sophistication.",
 };
 
+export const revalidate = 0;
+
 export default function RootLayout({
   children,
 }: Readonly<{

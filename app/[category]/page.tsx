@@ -59,6 +59,7 @@ export default async function CategoryPage({
               <Image
                 src={product.imageUrl}
                 alt="Product image"
+                loading="lazy"
                 className="w-full h-full object-cover object-center lg:h-full lg:w-full"
                 width={300}
                 height={300}

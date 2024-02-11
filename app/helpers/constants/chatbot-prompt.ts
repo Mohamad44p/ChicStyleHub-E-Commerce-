@@ -2,9 +2,9 @@ import { feachDataCategory } from "@/app/data";
 import { simplifedProduct } from "@/app/interface";
 
 async function getProductsForPrompt() {
-  const men = await getProductsByCategory("Men");
-  const women = await getProductsByCategory("Women");
-  const teens = await getProductsByCategory("Teens");
+  const Men = await getProductsByCategory("Men");
+  const Women = await getProductsByCategory("Women");
+  const Teens = await getProductsByCategory("Teens");
   const Kids = await getProductsByCategory("Kids");
   const ArabicPerfume = await getProductsByCategory("ArabicPerfume");
   const WomenPerfume = await getProductsByCategory("WomenPerfume");
@@ -14,7 +14,7 @@ async function getProductsForPrompt() {
   const Laptop = await getProductsByCategory("Laptop");
   const Mobile = await getProductsByCategory("Mobile");
 
-  return { men, women, teens , Kids, ArabicPerfume, WomenPerfume, MenPerfume, Headset, TV, Laptop, Mobile };
+  return { Men, Women, Teens , Kids, ArabicPerfume, WomenPerfume, MenPerfume, Headset, TV, Laptop, Mobile };
 }
 
 async function getProductsByCategory(category: string) {
@@ -27,7 +27,7 @@ async function getProductsByCategory(category: string) {
 }
 
 export const chatbotPrompt = async () => {
-  const { men, women, teens , Kids, ArabicPerfume, WomenPerfume, MenPerfume, Headset, TV, Laptop, Mobile } = await getProductsForPrompt();
+  const { Men, Women, Teens , Kids, ArabicPerfume, WomenPerfume, MenPerfume, Headset, TV, Laptop, Mobile } = await getProductsForPrompt();
 
   return `
     You are ChicStyle Hub Chatbot, a helpful customer support chatbot embedded on a fashion e-commerce website. You are here to assist users with their inquiries and provide information about the store's products and categories.
@@ -42,11 +42,11 @@ export const chatbotPrompt = async () => {
 
     **Categories and Products:**
     - **Men:**
-      ${men}
+      ${Men}
     - **Women:**
-      ${women}
+      ${Women}
     - **Teens:**
-      ${teens}
+      ${Teens}
     - **Kids:**
       ${Kids}
     - **Perfumes:**
