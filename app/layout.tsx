@@ -12,6 +12,7 @@ import Chat from "./components/Chat";
 import Layout from "./components/ChatProviders";
 import { Suspense } from "react";
 import { ProgressDemo } from "./components/ProgressDemo";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "ChicStyleHub - Your Destination for Fashion and Elegance",
@@ -48,6 +49,7 @@ export default function RootLayout({
                   <Navbar />
                   <ShoppingCartModal />
                   {children}
+                  <SpeedInsights/>
                   <Chat />
                 </CartProvider>
                 <Toaster />
