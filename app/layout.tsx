@@ -10,6 +10,8 @@ import { ThemeProvider } from "@/app/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Chat from "./components/Chat";
 import Layout from "./components/ChatProviders";
+import { Suspense } from "react";
+import { ProgressDemo } from "./components/ProgressDemo";
 
 export const metadata: Metadata = {
   title: "ChicStyleHub - Your Destination for Fashion and Elegance",
@@ -27,25 +29,32 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Layout>
-      <body className={inter.className}>
-       <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-       >
-        <ClerkProvider>
-         
-          <CartProvider>
-            <Navbar />
-            <ShoppingCartModal />
-            {children}
-            <Chat/>
-          </CartProvider>
-          <Toaster/>
-        </ClerkProvider>
-        </ThemeProvider>
-      </body>
+        <body className={inter.className}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ClerkProvider>
+              <Suspense
+                fallback={
+                  <div>
+                    <ProgressDemo />
+                  </div>
+                }
+              >
+                <CartProvider>
+                  <Navbar />
+                  <ShoppingCartModal />
+                  {children}
+                  <Chat />
+                </CartProvider>
+                <Toaster />
+              </Suspense>
+            </ClerkProvider>
+          </ThemeProvider>
+        </body>
       </Layout>
     </html>
   );
